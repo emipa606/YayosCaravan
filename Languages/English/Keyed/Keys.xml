@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <caravanVisual_ModVersion>Installed mod-version: {0}</caravanVisual_ModVersion>
+  <caravanVisual_swinganimation>Swing animation</caravanVisual_swinganimation>
+  <caravanVisual_swinganimation_tooltip>Pawns will move in a swinging motion</caravanVisual_swinganimation_tooltip>
+  <caravanVisual_showanimal>Show animal</caravanVisual_showanimal>
+  <caravanVisual_showanimal_tooltip>Show caravan animals on the map</caravanVisual_showanimal_tooltip>
+  <caravanVisual_spacingbetweenpawns>Spacing between pawns: {0}</caravanVisual_spacingbetweenpawns>
+  <caravanVisual_spacingbetweenpawns_tooltip>How far apart pawns will be drawn</caravanVisual_spacingbetweenpawns_tooltip>
+  <caravanVisual_pawnzoomoutscale>Pawn zoom out scale: {0}</caravanVisual_pawnzoomoutscale>
+  <caravanVisual_pawnzoomoutscale_tooltip>Scale of pawns when zoom out</caravanVisual_pawnzoomoutscale_tooltip>
+  <caravanVisual_pawnscale>Pawn scale: {0}</caravanVisual_pawnscale>
+  <caravanVisual_pawnscale_tooltip>Scale of pawns</caravanVisual_pawnscale_tooltip>
+  <caravanVisual_maxpawncount>Max pawn count (0 is unlimited): {0}</caravanVisual_maxpawncount>
+  <caravanVisual_maxpawncount_tooltip>Maximum number of pawns to display in one caravan</caravanVisual_maxpawncount_tooltip>
+  <caravanVisual_zoomoutmode>Zoom out mode</caravanVisual_zoomoutmode>
+  <caravanVisual_zoomoutmode_tooltip>Sets how the caravan is displayed when viewed from a distance by zooming out.</caravanVisual_zoomoutmode_tooltip>
+</LanguageData>
