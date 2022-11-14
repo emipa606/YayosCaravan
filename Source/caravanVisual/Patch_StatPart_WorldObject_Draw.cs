@@ -41,7 +41,6 @@ public class Patch_StatPart_WorldObject_Draw
             return true;
         }
 
-
         cd = dataUtility.GetData(caravan);
 
         var averageTileSize = Find.WorldGrid.averageTileSize;
@@ -83,6 +82,7 @@ public class Patch_StatPart_WorldObject_Draw
             cd.m.Add(new Material(ShaderDatabase.WorldOverlayTransparentLit));
         }
 
+        var longitude = Find.WorldGrid.LongLatOf(caravan.Tile).x;
         for (var i = 0; i < ar_pawn.Count; i++)
         {
             if (i == 0)
@@ -110,7 +110,7 @@ public class Patch_StatPart_WorldObject_Draw
                 }
 
                 caravanComponent.DrawQuadTangentialToPlanet(caravan.pather.MovingNow ? ar_pawn[i].thingIDNumber : -1,
-                    instance.DrawPos, scale * 3f * averageTileSize, 0.015f, cd.m[i], false, false, propertyBlock0);
+                    instance.DrawPos, scale * 3f * averageTileSize, 0.015f, cd.m[i], longitude, propertyBlock0);
             }
             else
             {
@@ -157,13 +157,13 @@ public class Patch_StatPart_WorldObject_Draw
                     // fade out
                     caravanComponent.DrawQuadTangentialToPlanet(
                         caravan.pather.MovingNow ? ar_pawn[i].thingIDNumber : -1, pos,
-                        scale * 3f * averageTileSize * scale2, 0.015f, cd.m[i], false, false, propertyBlock0);
+                        scale * 3f * averageTileSize * scale2, 0.015f, cd.m[i], longitude, propertyBlock0);
                 }
                 else
                 {
                     caravanComponent.DrawQuadTangentialToPlanet(
                         caravan.pather.MovingNow ? ar_pawn[i].thingIDNumber : -1, pos,
-                        scale * 3f * averageTileSize * scale2, 0.015f, cd.m[i], false, false, propertyBlock);
+                        scale * 3f * averageTileSize * scale2, 0.015f, cd.m[i], longitude, propertyBlock);
                 }
             }
         }

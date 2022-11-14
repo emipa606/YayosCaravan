@@ -95,17 +95,29 @@ public class caravanComponent : WorldComponent
 
 
     public static void DrawQuadTangentialToPlanet(int uniqueTick, Vector3 pos, float size, float altOffset,
-        Material material, bool counterClockwise = false, bool useSkyboxLayer = false,
-        MaterialPropertyBlock propertyBlock = null)
+        Material material, float longitude, MaterialPropertyBlock propertyBlock = null)
     {
         if (material == null)
         {
             return;
         }
 
-        var normalized = pos.normalized;
-        var vector = !counterClockwise ? normalized : -normalized;
+        var vector = pos.normalized;
         var angle = Vector3.left;
+        switch (longitude)
+        {
+            case > 45f:
+                angle = new Vector3(0, 0, -1);
+                break;
+            case < -45f:
+                angle = new Vector3(0, 0, 1);
+                break;
+        }
+
+        if (longitude is > 135f or < -135f)
+        {
+            angle = Vector3.right;
+        }
 
         if (caravanVisualMod.instance.Settings.SwingAnimation)
         {
@@ -130,9 +142,9 @@ public class caravanComponent : WorldComponent
 
         var s = new Vector3(size, 1f, size);
         var matrix = default(Matrix4x4);
-        matrix.SetTRS(pos + (normalized * altOffset), q, s);
+        matrix.SetTRS(pos + (vector * altOffset), q, s);
 
-        var layer = useSkyboxLayer ? WorldCameraManager.WorldSkyboxLayer : WorldCameraManager.WorldLayer;
+        var layer = WorldCameraManager.WorldLayer;
         if (propertyBlock != null)
         {
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, layer, null, 0, propertyBlock);

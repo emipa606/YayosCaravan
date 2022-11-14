@@ -46,7 +46,6 @@ You can adjust the value to use the desired setting.
 -  Spacing between pawns
 **
 
-
 # *** Incompleted Idea**
 
 **
@@ -56,27 +55,17 @@ You can adjust the value to use the desired setting.
 
 **
 
-
 https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w] Yayo's Youtube
 https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w]![Image](https://imgur.com/vGVHUDk.png)
 
 The latest news about my mods are posted on YouTube.
 Subscribe to YouTube and be the first to know.
 
-
-https://ko-fi.com/kr_yayo]![Image](https://i.imgur.com/d6Vx7Sj.png)
-
-I'm erratic and cannot update this in return for a donation.
-If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
-
-
-
 # *** Recommand Mods**
 
 **
 -  https://steamcommunity.com/sharedfiles/filedetails/?id=2575938407]Yayo's Animation (Add Animation for Pawns)
 **
-
 
 # *** Incompatible**
 
@@ -85,10 +74,9 @@ If you'd like to donate for something you're currently enjoying with the mod, I'
 
 **
 
-
-
 **Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.**
+
 ![Image](https://i.imgur.com/PwoNOj4.png)
 
 
