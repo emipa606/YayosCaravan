@@ -32,12 +32,6 @@ public class caravanComponent : WorldComponent
 
         foreach (var c in dataUtility.dic_caravan.Keys)
         {
-            if (c == null)
-            {
-                dataUtility.Remove(c);
-                continue;
-            }
-
             cd = dataUtility.GetData(c);
             cd.tryAddPrevPos();
         }

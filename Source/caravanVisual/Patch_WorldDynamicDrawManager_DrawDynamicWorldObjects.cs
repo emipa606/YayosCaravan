@@ -21,18 +21,10 @@ public class Patch_WorldDynamicDrawManager_DrawDynamicWorldObjects
 
         foreach (var c in dataUtility.dic_caravan.Keys)
         {
-            if (c == null)
+            if (c.def.expandingIcon)
             {
-                dataUtility.Remove(c);
-                continue;
+                c.Draw();
             }
-
-            if (!c.def.expandingIcon)
-            {
-                continue;
-            }
-
-            c.Draw();
         }
     }
 }
