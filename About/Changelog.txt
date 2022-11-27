@@ -1,5 +1,8 @@
 # Changelog for YayosCaravan
 
+1.4.2 - Removed redundant null-checks, thanks SokyranTheDragon
+
+
 1.4.1 - Caravan should now render normally on all sides of the globe.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

@@ -88,4 +88,4 @@ I'd love to see variations come out with various ideas.**
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
-
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2886919774]Last updated YYYY-50-27
