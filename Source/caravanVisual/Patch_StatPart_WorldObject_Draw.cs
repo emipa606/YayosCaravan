@@ -17,7 +17,7 @@ public class Patch_StatPart_WorldObject_Draw
     private static readonly MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
     private static float scale2 = 1f; // 수정금지 동물크기
     private static Dictionary<WorldObject, List<Vector3>> dic_pos = new Dictionary<WorldObject, List<Vector3>>();
-    private static List<Pawn> ar_pawn = new List<Pawn>();
+    private static List<Pawn> ar_pawn = [];
     private static int n;
     private static Vector3 pos;
     private static int gapTick = 100;
@@ -64,7 +64,7 @@ public class Patch_StatPart_WorldObject_Draw
 
         if (cd.prevPos == null)
         {
-            cd.prevPos = new List<Vector3>();
+            cd.prevPos = [];
         }
 
         gapTick = Mathf.Max(1,

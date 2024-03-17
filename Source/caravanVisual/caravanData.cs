@@ -7,11 +7,11 @@ namespace caravanVisual;
 
 public class caravanData : IExposable
 {
+    public readonly List<Material> m = [];
     private Caravan c;
-    public List<Material> m = new List<Material>();
 
     // Data
-    public List<Vector3> prevPos = new List<Vector3>();
+    public List<Vector3> prevPos = [];
 
 
     private int tickGap = 20;

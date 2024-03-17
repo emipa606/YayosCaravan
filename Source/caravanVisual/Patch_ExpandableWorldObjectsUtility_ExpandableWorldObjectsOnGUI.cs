@@ -16,7 +16,7 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
         .StaticFieldRefAccess<List<WorldObject>>(AccessTools.Field(typeof(ExpandableWorldObjectsUtility),
             "tmpWorldObjects")).Invoke();
 
-    private static List<Pawn> ar_pawn = new List<Pawn>();
+    private static List<Pawn> ar_pawn = [];
 
     public static bool Prefix()
     {
@@ -126,7 +126,7 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 
     private static Material OverrideMaterialIfNeeded(Material original, Pawn pawn, bool portrait = false)
     {
-        var baseMat = !portrait && pawn.IsInvisible() ? InvisibilityMatPool.GetInvisibleMat(original) : original;
-        return pawn.Drawer.renderer.graphics.flasher.GetDamagedMat(baseMat);
+        var baseMat = !portrait && pawn.IsHiddenFromPlayer() ? InvisibilityMatPool.GetInvisibleMat(original) : original;
+        return pawn.Drawer.renderer.flasher.GetDamagedMat(baseMat);
     }
 }
