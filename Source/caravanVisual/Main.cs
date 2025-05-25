@@ -4,9 +4,10 @@ using Verse;
 
 namespace caravanVisual;
 
-public class HarmonyPatches : Mod
+[StaticConstructorOnStartup]
+public static class Main
 {
-    public HarmonyPatches(ModContentPack content) : base(content)
+    static Main()
     {
         new Harmony("com.yayo.caravanVisual").PatchAll(Assembly.GetExecutingAssembly());
     }

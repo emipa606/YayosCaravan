@@ -1,15 +1,20 @@
 ﻿using HarmonyLib;
 using RimWorld.Planet;
 
-namespace caravanVisual;
+namespace caravanVisual.HarmonyPatches;
 
 [HarmonyPatch(typeof(WorldDynamicDrawManager), "DrawDynamicWorldObjects")]
-public class Patch_WorldDynamicDrawManager_DrawDynamicWorldObjects
+public class WorldDynamicDrawManager_DrawDynamicWorldObjects
 {
     [HarmonyPriority(0)]
-    public static void Postfix(Caravan __instance)
+    public static void Postfix()
     {
-        if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.en_zoomMode.vanilla)
+        if (!caravanVisualMod.instance.Settings.ToggleVisibility)
+        {
+            return;
+        }
+
+        if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.ZoomMode.vanilla)
         {
             return;
         }
@@ -19,7 +24,7 @@ public class Patch_WorldDynamicDrawManager_DrawDynamicWorldObjects
             return;
         }
 
-        foreach (var c in dataUtility.dic_caravan.Keys)
+        foreach (var c in dataUtility.CaravanDatas.Keys)
         {
             if (c.def.expandingIcon)
             {

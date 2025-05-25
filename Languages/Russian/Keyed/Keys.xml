@@ -16,4 +16,5 @@
   <caravanVisual_maxpawncount_tooltip>Максимальное количество пешек, выставляемых в одном караване</caravanVisual_maxpawncount_tooltip>
   <caravanVisual_zoomoutmode>Режим уменьшения масштаба</caravanVisual_zoomoutmode>
   <caravanVisual_zoomoutmode_tooltip>Устанавливает, как отображается караван при просмотре с расстояния при уменьшении масштаба.</caravanVisual_zoomoutmode_tooltip>
+  <caravanVisual_toggleVisibility>Включить видимость пешек каравана</caravanVisual_toggleVisibility>
 </LanguageData>

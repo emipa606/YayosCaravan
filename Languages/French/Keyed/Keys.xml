@@ -16,4 +16,5 @@
   <caravanVisual_maxpawncount_tooltip>Nombre maximum de pions à exposer dans une caravane</caravanVisual_maxpawncount_tooltip>
   <caravanVisual_zoomoutmode>Mode zoom arrière</caravanVisual_zoomoutmode>
   <caravanVisual_zoomoutmode_tooltip>Définit la façon dont la caravane est affichée lorsqu'elle est vue de loin en faisant un zoom arrière.</caravanVisual_zoomoutmode_tooltip>
+  <caravanVisual_toggleVisibility>Toggle caravan pawn-visibility</caravanVisual_toggleVisibility>
 </LanguageData>

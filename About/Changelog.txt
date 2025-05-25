@@ -1,5 +1,9 @@
 # Changelog for YayosCaravan
 
+1.5.2 - Added toggle for the caravan graphics on the world screen
+Used DeepL to update translations for ChineseSimplified, French, German, Russian, Spanish
+
+
 1.5.1 - Updated spanish translation, thanks Ferchu
 
 

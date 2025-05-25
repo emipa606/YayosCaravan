@@ -6,70 +6,70 @@ namespace caravanVisual;
 
 public class caravanComponent : WorldComponent
 {
-    public enum en_zoomMode
+    public enum ZoomMode
     {
         none,
         bigLeader,
         vanilla
     }
 
-    public static float time;
+    private static float time;
 
-    private caravanData cd;
+    private caravanData caravanData;
 
     public caravanComponent(World world) : base(world)
     {
-        dataUtility.reset();
+        dataUtility.Reset();
     }
 
     public override void WorldComponentTick()
     {
-        Update();
+        update();
         if (WorldRendererUtility.WorldRenderedNow)
         {
             return;
         }
 
-        foreach (var c in dataUtility.dic_caravan.Keys)
+        foreach (var c in dataUtility.CaravanDatas.Keys)
         {
-            cd = dataUtility.GetData(c);
-            cd.tryAddPrevPos();
+            caravanData = dataUtility.GetData(c);
+            caravanData.TryAddPrevPos();
         }
     }
 
 
-    public static Rot4 getRot(Caravan caravan)
+    public static Rot4 GetRot(Caravan caravan)
     {
-        var vel = caravan.tweener.LastTickTweenedVelocity;
-        Rot4 r;
-        if (Mathf.Abs(vel.x) > Mathf.Abs(vel.y))
+        var tweenedVelocity = caravan.tweener.LastTickTweenedVelocity;
+        Rot4 rot;
+        if (Mathf.Abs(tweenedVelocity.x) > Mathf.Abs(tweenedVelocity.y))
         {
-            r = vel.x >= 0 ? Rot4.East : Rot4.West;
+            rot = tweenedVelocity.x >= 0 ? Rot4.East : Rot4.West;
         }
         else
         {
-            r = vel.y > 0 ? Rot4.North : Rot4.South;
+            rot = tweenedVelocity.y > 0 ? Rot4.North : Rot4.South;
         }
 
-        return r;
+        return rot;
     }
 
-    public static Rot4 getRot(Vector3 vel)
+    public static Rot4 GetRot(Vector3 velocity)
     {
-        Rot4 r;
-        if (Mathf.Abs(vel.x) > Mathf.Abs(vel.y))
+        Rot4 rot;
+        if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y))
         {
-            r = vel.x >= 0 ? Rot4.East : Rot4.West;
+            rot = velocity.x >= 0 ? Rot4.East : Rot4.West;
         }
         else
         {
-            r = vel.y > 0 ? Rot4.North : Rot4.South;
+            rot = velocity.y > 0 ? Rot4.North : Rot4.South;
         }
 
-        return r;
+        return rot;
     }
 
-    public void Update()
+    private static void update()
     {
         if (Current.ProgramState != ProgramState.Playing)
         {
@@ -120,15 +120,15 @@ public class caravanComponent : WorldComponent
                 var wiggle = Mathf.Sin((time + uniqueTick) * 5f);
                 angle += Vector3.up * wiggle * 0.1f;
                 pos += wiggle * new Vector3(0.03f, 0f, 0f);
-                angle.Normalize();
             }
             else
             {
                 var wiggle = Mathf.Sin((time + uniqueTick) * 2f);
                 angle += Vector3.up * wiggle * 0.05f;
                 pos += wiggle * new Vector3(0.015f, 0f, 0f);
-                angle.Normalize();
             }
+
+            angle.Normalize();
         }
 
 

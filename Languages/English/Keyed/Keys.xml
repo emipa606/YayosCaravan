@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <caravanVisual_ModVersion>Installed mod-version: {0}</caravanVisual_ModVersion>
+  <caravanVisual_toggleVisibility>Toggle caravan pawn-visibility</caravanVisual_toggleVisibility>
   <caravanVisual_swinganimation>Swing animation</caravanVisual_swinganimation>
   <caravanVisual_swinganimation_tooltip>Pawns will move in a swinging motion</caravanVisual_swinganimation_tooltip>
   <caravanVisual_showanimal>Show animal</caravanVisual_showanimal>

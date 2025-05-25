@@ -16,4 +16,5 @@
   <caravanVisual_maxpawncount_tooltip>Maximale Anzahl von Spielfiguren, die in einem Wohnwagen ausgestellt werden können</caravanVisual_maxpawncount_tooltip>
   <caravanVisual_zoomoutmode>Verkleinerungsmodus</caravanVisual_zoomoutmode>
   <caravanVisual_zoomoutmode_tooltip>Legt fest, wie der Wohnwagen angezeigt wird, wenn er aus der Ferne betrachtet wird, indem er herausgezoomt wird.</caravanVisual_zoomoutmode_tooltip>
+  <caravanVisual_toggleVisibility>Karawanen-Bauern-Sichtbarkeit umschalten</caravanVisual_toggleVisibility>
 </LanguageData>

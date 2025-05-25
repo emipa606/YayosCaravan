@@ -7,10 +7,10 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
-namespace caravanVisual;
+namespace caravanVisual.HarmonyPatches;
 
-[HarmonyPatch(typeof(ExpandableWorldObjectsUtility), "ExpandableWorldObjectsOnGUI")]
-public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
+[HarmonyPatch(typeof(ExpandableWorldObjectsUtility), nameof(ExpandableWorldObjectsUtility.ExpandableWorldObjectsOnGUI))]
+public class ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 {
     private static readonly List<WorldObject> tmpWorldObjects = AccessTools
         .StaticFieldRefAccess<List<WorldObject>>(AccessTools.Field(typeof(ExpandableWorldObjectsUtility),
@@ -20,7 +20,12 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 
     public static bool Prefix()
     {
-        if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.en_zoomMode.vanilla)
+        if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.ZoomMode.vanilla)
+        {
+            return true;
+        }
+
+        if (!caravanVisualMod.instance.Settings.ToggleVisibility)
         {
             return true;
         }
@@ -32,7 +37,7 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 
         tmpWorldObjects.Clear();
         tmpWorldObjects.AddRange(Find.WorldObjects.AllWorldObjects);
-        SortByExpandingIconPriority(tmpWorldObjects);
+        sortByExpandingIconPriority(tmpWorldObjects);
         var worldTargeter = Find.WorldTargeter;
         List<WorldObject> worldObjectsUnderMouse = null;
         if (worldTargeter.IsTargeting)
@@ -73,7 +78,7 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 
                     switch (caravanVisualMod.instance.Settings.ZoomMode)
                     {
-                        case caravanComponent.en_zoomMode.bigLeader:
+                        case caravanComponent.ZoomMode.bigLeader:
 
                             ar_pawn.Clear();
                             ar_pawn.AddRange(caravan.PawnsListForReading);
@@ -86,10 +91,10 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
                             rect.size *= finalScale;
                             GUI.color = new Color(1f, 1f, 1f, expandingIconColor.a);
                             Texture t = PortraitsCache.Get(p, new Vector2(512f, 512f),
-                                caravanComponent.getRot(caravan));
+                                caravanComponent.GetRot(caravan));
                             Widgets.DrawTextureRotated(rect, t, caravan.ExpandingIconRotation);
                             break;
-                        case caravanComponent.en_zoomMode.none:
+                        case caravanComponent.ZoomMode.none:
                             break;
                     }
                 }
@@ -110,7 +115,7 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
     }
 
 
-    private static void SortByExpandingIconPriority(List<WorldObject> worldObjects)
+    private static void sortByExpandingIconPriority(List<WorldObject> worldObjects)
     {
         worldObjects.SortBy(delegate(WorldObject x)
         {
@@ -122,11 +127,5 @@ public class Patch_ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 
             return num;
         }, x => x.ID);
-    }
-
-    private static Material OverrideMaterialIfNeeded(Material original, Pawn pawn, bool portrait = false)
-    {
-        var baseMat = !portrait && pawn.IsHiddenFromPlayer() ? InvisibilityMatPool.GetInvisibleMat(original) : original;
-        return pawn.Drawer.renderer.flasher.GetDamagedMat(baseMat);
     }
 }

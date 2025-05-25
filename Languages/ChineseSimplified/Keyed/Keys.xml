@@ -16,4 +16,5 @@
   <caravanVisual_maxpawncount_tooltip>在一个大篷车中展示的最大棋子数量</caravanVisual_maxpawncount_tooltip>
   <caravanVisual_zoomoutmode>缩小模式</caravanVisual_zoomoutmode>
   <caravanVisual_zoomoutmode_tooltip>设置从远处看房车时，如何通过缩放来显示房车。</caravanVisual_zoomoutmode_tooltip>
+  <caravanVisual_toggleVisibility>切换商队棋子的可见性</caravanVisual_toggleVisibility>
 </LanguageData>

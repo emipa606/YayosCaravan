@@ -1,11 +1,10 @@
 ﻿using HarmonyLib;
 using RimWorld.Planet;
 
-namespace caravanVisual;
+namespace caravanVisual.HarmonyPatches;
 
-[HarmonyPatch(typeof(Caravan))]
-[HarmonyPatch("ExposeData")]
-public class Patch_Caravan_ExposeData
+[HarmonyPatch(typeof(Caravan), nameof(Caravan.ExposeData))]
+public class Caravan_ExposeData
 {
     private static void Postfix(Caravan __instance)
     {

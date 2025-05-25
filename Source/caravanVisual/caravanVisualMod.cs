@@ -38,10 +38,7 @@ internal class caravanVisualMod : Mod
     {
         get
         {
-            if (settings == null)
-            {
-                settings = GetSettings<caravanVisualSettings>();
-            }
+            settings ??= GetSettings<caravanVisualSettings>();
 
             return settings;
         }
@@ -64,50 +61,50 @@ internal class caravanVisualMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.Gap();
-        listing_Standard.CheckboxLabeled("caravanVisual_swinganimation".Translate(), ref Settings.SwingAnimation,
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.Gap();
+        listingStandard.CheckboxLabeled("caravanVisual_swinganimation".Translate(), ref Settings.SwingAnimation,
             "caravanVisual_swinganimation_tooltip".Translate());
-        listing_Standard.CheckboxLabeled("caravanVisual_showanimal".Translate(), ref Settings.ShowAnimal,
+        listingStandard.CheckboxLabeled("caravanVisual_showanimal".Translate(), ref Settings.ShowAnimal,
             "caravanVisual_showanimal_tooltip".Translate());
-        listing_Standard.Gap();
-        listing_Standard.Label("caravanVisual_zoomoutmode".Translate(), -1f,
+        listingStandard.Gap();
+        listingStandard.Label("caravanVisual_zoomoutmode".Translate(), -1f,
             "caravanVisual_zoomoutmode_tooltip".Translate());
-        foreach (var zoomMode in (caravanComponent.en_zoomMode[])Enum.GetValues(typeof(caravanComponent.en_zoomMode)))
+        foreach (var zoomMode in (caravanComponent.ZoomMode[])Enum.GetValues(typeof(caravanComponent.ZoomMode)))
         {
-            if (listing_Standard.RadioButton(zoomMode.ToString().CapitalizeFirst(), zoomMode == Settings.ZoomMode))
+            if (listingStandard.RadioButton(zoomMode.ToString().CapitalizeFirst(), zoomMode == Settings.ZoomMode))
             {
                 Settings.ZoomMode = zoomMode;
             }
         }
 
-        listing_Standard.Gap();
+        listingStandard.Gap();
         Settings.PawnCount =
-            (int)Math.Round(listing_Standard.SliderLabeled("caravanVisual_maxpawncount".Translate(Settings.PawnCount),
+            (int)Math.Round(listingStandard.SliderLabeled("caravanVisual_maxpawncount".Translate(Settings.PawnCount),
                 Settings.PawnCount,
                 0, 25, 0.5F, "caravanVisual_maxpawncount_tooltip".Translate()), 1);
-        listing_Standard.Gap();
-        Settings.PawnScale = (float)Math.Round((decimal)listing_Standard.SliderLabeled(
+        listingStandard.Gap();
+        Settings.PawnScale = (float)Math.Round((decimal)listingStandard.SliderLabeled(
             "caravanVisual_pawnscale".Translate(Settings.PawnScale.ToStringPercent()), Settings.PawnScale,
             0f, 2f, 0.5F, "caravanVisual_pawnscale_tooltip".Translate()), 3);
-        listing_Standard.Gap();
-        Settings.ZoomScale = (float)Math.Round((decimal)listing_Standard.SliderLabeled(
+        listingStandard.Gap();
+        Settings.ZoomScale = (float)Math.Round((decimal)listingStandard.SliderLabeled(
             "caravanVisual_pawnzoomoutscale".Translate(Settings.ZoomScale.ToStringPercent()), Settings.ZoomScale,
             0f, 2f, 0.5F, "caravanVisual_pawnzoomoutscale_tooltip".Translate()), 3);
-        listing_Standard.Gap();
-        Settings.Spacing = (float)Math.Round((decimal)listing_Standard.SliderLabeled(
+        listingStandard.Gap();
+        Settings.Spacing = (float)Math.Round((decimal)listingStandard.SliderLabeled(
             "caravanVisual_spacingbetweenpawns".Translate(Settings.Spacing.ToStringPercent()), Settings.Spacing,
             0f, 5f, 0.5F, "caravanVisual_spacingbetweenpawns_tooltip".Translate()), 2);
 
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("caravanVisual_ModVersion".Translate(currentVersion));
+            listingStandard.Label("caravanVisual_ModVersion".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 }

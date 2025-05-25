@@ -12,7 +12,8 @@ internal class caravanVisualSettings : ModSettings
     public bool ShowAnimal = true;
     public float Spacing = 1f;
     public bool SwingAnimation = true;
-    public caravanComponent.en_zoomMode ZoomMode = caravanComponent.en_zoomMode.bigLeader;
+    public bool ToggleVisibility = true;
+    public caravanComponent.ZoomMode ZoomMode = caravanComponent.ZoomMode.bigLeader;
     public float ZoomScale = 1f;
 
     /// <summary>
@@ -23,7 +24,8 @@ internal class caravanVisualSettings : ModSettings
         base.ExposeData();
         Scribe_Values.Look(ref SwingAnimation, "SwingAnimation", true);
         Scribe_Values.Look(ref ShowAnimal, "ShowAnimal", true);
-        Scribe_Values.Look(ref ZoomMode, "ZoomMode", caravanComponent.en_zoomMode.bigLeader);
+        Scribe_Values.Look(ref ToggleVisibility, "ToggleVisibility", true);
+        Scribe_Values.Look(ref ZoomMode, "ZoomMode", caravanComponent.ZoomMode.bigLeader);
         Scribe_Values.Look(ref PawnCount, "PawnCount");
         Scribe_Values.Look(ref PawnScale, "PawnScale", 1f);
         Scribe_Values.Look(ref ZoomScale, "ZoomScale", 1f);

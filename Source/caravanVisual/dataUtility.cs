@@ -5,26 +5,21 @@ namespace caravanVisual;
 
 public static class dataUtility
 {
-    public static Dictionary<Caravan, caravanData> dic_caravan = new Dictionary<Caravan, caravanData>();
+    public static Dictionary<Caravan, caravanData> CaravanDatas = new();
 
-    public static void reset()
+    public static void Reset()
     {
-        dic_caravan = new Dictionary<Caravan, caravanData>();
+        CaravanDatas = new Dictionary<Caravan, caravanData>();
     }
 
     public static caravanData GetData(Caravan key)
     {
-        if (!dic_caravan.ContainsKey(key))
+        if (!CaravanDatas.ContainsKey(key))
         {
-            dic_caravan[key] = new caravanData();
+            CaravanDatas[key] = new caravanData();
         }
 
-        dic_caravan[key].setParent(key);
-        return dic_caravan[key];
-    }
-
-    public static void Remove(Caravan key)
-    {
-        dic_caravan.Remove(key);
+        CaravanDatas[key].SetParent(key);
+        return CaravanDatas[key];
     }
 }

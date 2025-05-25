@@ -7,11 +7,11 @@ namespace caravanVisual;
 
 public class caravanData : IExposable
 {
-    public readonly List<Material> m = [];
-    private Caravan c;
+    public readonly List<Material> Materials = [];
+    private Caravan localCaravan;
 
     // Data
-    public List<Vector3> prevPos = [];
+    public List<Vector3> PrevPos = [];
 
 
     private int tickGap = 20;
@@ -23,14 +23,14 @@ public class caravanData : IExposable
         //Scribe_Collections.Look<Vector3>(ref prevPos, $"pastPos", LookMode.Value);
     }
 
-    public void setParent(Caravan _c)
+    public void SetParent(Caravan caravan)
     {
-        c = _c;
+        localCaravan = caravan;
     }
 
-    public void tryAddPrevPos()
+    public void TryAddPrevPos()
     {
-        tickGap = Mathf.RoundToInt(c.pather.nextTileCostTotal / 110f);
+        tickGap = Mathf.RoundToInt(localCaravan.pather.nextTileCostTotal / 110f);
         if (tickGap <= 0)
         {
             return;
@@ -41,9 +41,9 @@ public class caravanData : IExposable
             return; // 20 정도가 적당
         }
 
-        if (!Find.TickManager.Paused && c.pather.MovingNow && c.pawns.Count > 1)
+        if (!Find.TickManager.Paused && localCaravan.pather.MovingNow && localCaravan.pawns.Count > 1)
         {
-            prevPos.Insert(0, c.DrawPos);
+            PrevPos.Insert(0, localCaravan.DrawPos);
         }
     }
 }
