@@ -28,22 +28,25 @@ public class caravanData : IExposable
         localCaravan = caravan;
     }
 
-    public void TryAddPrevPos()
+    public void TryAddPrevPos(int delta)
     {
-        tickGap = Mathf.RoundToInt(localCaravan.pather.nextTileCostTotal / 110f);
-        if (tickGap <= 0)
+        for (var i = 0; i < delta; i++)
         {
-            return;
-        }
+            tickGap = Mathf.RoundToInt(localCaravan.pather.nextTileCostTotal / 110f);
+            if (tickGap <= 0)
+            {
+                return;
+            }
 
-        if (Find.TickManager.TicksGame % tickGap != 0)
-        {
-            return; // 20 정도가 적당
-        }
+            if ((Find.TickManager.TicksGame - delta) % tickGap != 0)
+            {
+                return; // 20 정도가 적당
+            }
 
-        if (!Find.TickManager.Paused && localCaravan.pather.MovingNow && localCaravan.pawns.Count > 1)
-        {
-            PrevPos.Insert(0, localCaravan.DrawPos);
+            if (!Find.TickManager.Paused && localCaravan.pather.MovingNow && localCaravan.pawns.Count > 1)
+            {
+                PrevPos.Insert(0, localCaravan.DrawPos);
+            }
         }
     }
 }

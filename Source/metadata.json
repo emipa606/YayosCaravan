@@ -2,11 +2,17 @@
   "Continued": true,
   "CanAdd": "0",
   "CanRemove": "0",
-  "PreviewVersion": "1.5",
+  "PreviewVersion": "1.6",
   "SocialImageSet": true,
-  "LastXmlCleaning": "2025-05-25T23:08:45.7448533+02:00",
+  "LastXmlCleaning": "2025-08-08T21:46:00.4769923+02:00",
   "SearchTags": [
     " animation",
     " world map"
-  ]
+  ],
+  "Patches": false,
+  "Defs": false,
+  "Assemblies": true,
+  "LinesOfCode": 26878,
+  "LinesOfXML": 0,
+  "CodeBaseSize": 70
 }

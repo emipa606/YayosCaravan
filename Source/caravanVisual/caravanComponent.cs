@@ -25,7 +25,7 @@ public class caravanComponent : WorldComponent
     public override void WorldComponentTick()
     {
         update();
-        if (WorldRendererUtility.WorldRenderedNow)
+        if (WorldRendererUtility.WorldRendered)
         {
             return;
         }
@@ -33,7 +33,7 @@ public class caravanComponent : WorldComponent
         foreach (var c in dataUtility.CaravanDatas.Keys)
         {
             caravanData = dataUtility.GetData(c);
-            caravanData.TryAddPrevPos();
+            caravanData.TryAddPrevPos(1);
         }
     }
 

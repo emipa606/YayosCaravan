@@ -30,11 +30,6 @@ public class ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
             return true;
         }
 
-        if (ExpandableWorldObjectsUtility.TransitionPct == 0f)
-        {
-            return false;
-        }
-
         tmpWorldObjects.Clear();
         tmpWorldObjects.AddRange(Find.WorldObjects.AllWorldObjects);
         sortByExpandingIconPriority(tmpWorldObjects);
@@ -55,7 +50,7 @@ public class ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
                 }
 
                 var expandingIconColor = tmpObject.ExpandingIconColor;
-                expandingIconColor.a = ExpandableWorldObjectsUtility.TransitionPct;
+                expandingIconColor.a = ExpandableWorldObjectsUtility.TransitionPct(tmpObject);
                 if (worldTargeter.IsTargetedNow(tmpObject, worldObjectsUnderMouse))
                 {
                     var num = GenMath.LerpDouble(-1f, 1f, 0.7f, 1f, Mathf.Sin(Time.time * 8f));

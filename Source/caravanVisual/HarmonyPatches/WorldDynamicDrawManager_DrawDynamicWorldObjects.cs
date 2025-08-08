@@ -19,11 +19,6 @@ public class WorldDynamicDrawManager_DrawDynamicWorldObjects
             return;
         }
 
-        if (!(ExpandableWorldObjectsUtility.TransitionPct >= 1f))
-        {
-            return;
-        }
-
         foreach (var c in dataUtility.CaravanDatas.Keys)
         {
             if (c.def.expandingIcon)

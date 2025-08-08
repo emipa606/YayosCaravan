@@ -47,8 +47,8 @@ public class WorldObject_Draw
 
         caravanData = dataUtility.GetData(caravan);
 
-        var averageTileSize = Find.WorldGrid.averageTileSize;
-        var transitionPct = ExpandableWorldObjectsUtility.TransitionPct;
+        var averageTileSize = Find.WorldGrid.AverageTileSize;
+        var transitionPct = ExpandableWorldObjectsUtility.TransitionPct(__instance);
 
         pawns.Clear();
         pawns.AddRange(caravan.PawnsListForReading);
