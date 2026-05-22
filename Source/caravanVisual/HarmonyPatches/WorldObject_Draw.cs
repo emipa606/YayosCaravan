@@ -149,7 +149,7 @@ public class WorldObject_Draw
 
                 caravanData.Materials[i].mainTexture = PortraitsCache.Get(pawns[i],
                     new Vector2(Mathf.Min(512f, rect.width), Mathf.Min(512f, rect.height)),
-                    caravanComponent.GetRot(velocity), default,
+                    caravanComponent.GetRot(position, -velocity), default,
                     0.5f);
 
 

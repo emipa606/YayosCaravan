@@ -40,18 +40,7 @@ public class caravanComponent : WorldComponent
 
     public static Rot4 GetRot(Caravan caravan)
     {
-        var tweenedVelocity = caravan.tweener.LastTickTweenedVelocity;
-        Rot4 rot;
-        if (Mathf.Abs(tweenedVelocity.x) > Mathf.Abs(tweenedVelocity.y))
-        {
-            rot = tweenedVelocity.x >= 0 ? Rot4.East : Rot4.West;
-        }
-        else
-        {
-            rot = tweenedVelocity.y > 0 ? Rot4.North : Rot4.South;
-        }
-
-        return rot;
+        return GetRot(caravan.DrawPos, caravan.tweener.LastTickTweenedVelocity);
     }
 
     public static Rot4 GetRot(Vector3 velocity)
@@ -67,6 +56,25 @@ public class caravanComponent : WorldComponent
         }
 
         return rot;
+    }
+
+    public static Rot4 GetRot(Vector3 pos, Vector3 velocity)
+    {
+        if (velocity.sqrMagnitude <= 1E-06f)
+        {
+            return Rot4.South;
+        }
+
+        WorldRendererUtility.GetTangentsToPlanet(pos, out var northTangent, out var eastTangent);
+        var east = Vector3.Dot(velocity, eastTangent);
+        var north = Vector3.Dot(velocity, northTangent);
+
+        if (Mathf.Abs(east) > Mathf.Abs(north))
+        {
+            return east >= 0f ? Rot4.East : Rot4.West;
+        }
+
+        return north > 0f ? Rot4.North : Rot4.South;
     }
 
     private static void update()
@@ -97,38 +105,30 @@ public class caravanComponent : WorldComponent
         }
 
         var vector = pos.normalized;
-        var angle = Vector3.left;
-        switch (longitude)
+        var angle = Vector3.Cross(Vector3.up, vector);
+        if (angle.sqrMagnitude <= 1E-06f)
         {
-            case > 45f:
-                angle = new Vector3(0, 0, -1);
-                break;
-            case < -45f:
-                angle = new Vector3(0, 0, 1);
-                break;
+            WorldRendererUtility.GetTangentsToPlanet(pos, out _, out angle);
+            angle = -angle;
         }
 
-        if (longitude is > 135f or < -135f)
-        {
-            angle = Vector3.right;
-        }
+        angle.Normalize();
 
         if (caravanVisualMod.instance.Settings.SwingAnimation)
         {
+            var swingAxis = Vector3.Cross(angle, vector).normalized;
             if (uniqueTick >= 0)
             {
                 var wiggle = Mathf.Sin((time + uniqueTick) * 5f);
-                angle += Vector3.up * wiggle * 0.1f;
-                pos += wiggle * new Vector3(0.03f, 0f, 0f);
+                angle = (angle + swingAxis * wiggle * 0.1f).normalized;
+                pos += wiggle * angle * 0.03f;
             }
             else
             {
                 var wiggle = Mathf.Sin((time + uniqueTick) * 2f);
-                angle += Vector3.up * wiggle * 0.05f;
-                pos += wiggle * new Vector3(0.015f, 0f, 0f);
+                angle = (angle + swingAxis * wiggle * 0.05f).normalized;
+                pos += wiggle * angle * 0.015f;
             }
-
-            angle.Normalize();
         }
 
 

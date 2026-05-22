@@ -1,35 +1,50 @@
 # GitHub Copilot Instructions for Yayo's Caravan (Continued)
 
 ## Mod Overview and Purpose
-**Yayo's Caravan (Continued)** is an update of the original YAYO's mod designed to enhance the visual representation of caravans on the world map in RimWorld. This mod provides customization options for players to modify how caravans appear and interact with the game world, allowing for a more tailored and immersive gameplay experience.
+Yayo's Caravan (Continued) is a mod for the game RimWorld, designed to update and enhance the functionalities of YAYOs mod. The primary focus of this mod is to offer a more immersive experience when interacting with caravans on the world map.
 
 ## Key Features and Systems
-- **Visual Enhancements**: Changes the appearance of caravans on the world map, offering multiple stylistic options such as "Big Leader" and "Vanilla".
-- **Customizable Settings**: Players can adjust numerous visual and functional settings like zoom-out mode, animation toggling, max pawn count, pawn scale, and spacing.
-- **Planned Features**: Future enhancements include sleeping poses, campfire/tent displays for resting caravans, and weapon displays.
-- **Compatibility**: The mod is compatible with Yayo's Animation but may conflict with mods that alter planet size.
+- **Visual Changes to the Caravan**: The mod changes the visual representation of caravans on the world map.
+- **Customizable Settings**: Players can adjust several aspects of the mod through option settings:
+  - Zoom out mode options: None, Big Leader, Vanilla.
+  - Animation toggle (On/Off).
+  - Show or hide animals.
+  - Maximum pawn count display.
+  - Adjustable pawn scale.
+  - Spacing between pawns.
+- **Future Features**: Although not yet implemented, there are ideas for sleeping poses and FX, displaying images of campfires or tents during rest, and showing weapons when the caravan stops.
 
 ## Coding Patterns and Conventions
-- Classes are generally defined as `public` or `internal` depending on their accessibility requirements.
-- Method names follow a clear and descriptive naming convention to denote their functionality.
-- The mod uses standard C# coding practices, complying with .NET Framework v4.8 and v4.8.1 conventions.
+- Classes are predominantly named using PascalCase, e.g., `Caravan_ExposeData`, `caravanComponent`.
+- Internal mod settings and behavior changes are encapsulated in classes like `caravanVisualMod` and `caravanVisualSettings`.
+- Utilization of interfaces such as `IExposable` in `caravanData` for serialization purposes with the `ExposeData()` method.
 
 ## XML Integration
-The mod likely interacts with XML for data-related operations such as defining caravan appearance settings and storing mod configurations. Ensure that XML files are structured correctly and correspond with C# classes responsible for reading and applying these settings.
+- The mod suggests XML settings integration, especially in defining or modifying RimWorld’s default settings for visual and interactive elements on the world map.
+- Ensure XML files are well-structured, utilizing the proper keys and values to match the mod's customizable features.
 
 ## Harmony Patching
-For modifying game behavior without altering original game files, Harmony patches are employed. This might involve:
-- Modifying or extending existing RimWorld caravan object methods to change visual representation.
-- Adding new functionalities through Harmony Postfix or Prefix methods.
-- Ensure compatibility with other mods by carefully patching only the necessary components.
+- This mod likely employs Harmony to patch methods in the base game to introduce new features without altering the base game's source code.
+- Use Harmony’s `Postfix` and `Prefix` attributes to modify original methods safely.
+- Ensure to target specific methods related to world view control and caravan behaviors for patches.
 
-## Suggestions for GitHub Copilot
-- **Enhanced Autocomplete**: Utilize GitHub Copilot to autocomplete repetitive coding patterns, especially for method signatures defined in the mod's classes.
-- **Code Suggestions**: Copilot can assist in generating Harmony patches by providing suggestions on where and how to insert prefix or postfix functions.
-- **XML Data Handling**: Employ Copilot to write boilerplate code for XML data parsing and handling, ensuring smooth interaction with RimWorld's data structures.
-- **Refactoring Assistance**: Leverage Copilot to propose refactoring options for cumbersome or outdated code within the mod, making it more efficient and maintainable.
-- **Error Checking**: Use Copilot’s capabilities to identify potential errors or bad practices in existing code and suggest improvements.
+## Suggestions for Copilot
+1. **Helper Functions**: Implement utility functions in `dataUtility` to handle common data operations, making the code cleaner and more maintainable.
+2. **Consistent Naming**: Use descriptive and consistent naming conventions for class members and methods to maintain clarity.
+3. **Expand With New Features**: Use Copilot to explore extending the current feature set, such as completing the 'Incompleted Idea' items.
+4. **Efficient XML Parsing**: Suggest Copilot snippets that correctly parse and apply settings defined in XML configuration files.
+5. **Robust Error Handling**: Leverage Copilot to implement error handling, possibly using `try-catch` blocks, especially where user inputs can affect settings.
+6. **Documentation**: Use Copilot to generate summaries and comments throughout the codebase for better clarity and documentation.
 
-By following these guidelines, contributions to the Yayo's Caravan (Continued) mod can be optimized, streamlined, and integrated seamlessly into the broader RimWorld modding ecosystem.
+## Additional Notes
+- Be aware of compatibility issues, especially with mods that change the planet size.
+- The mod encourages community involvement, suggesting modifications and contributions from developers to create variants.
+- For troubleshooting, it is advised to isolate the mod with its requirements and use relevant community forums or Discord channels for reporting and resolving issues.
 
-This instruction file should help guide contributors to the project, ensuring they have a good understanding of the mod's goals and the best practices for maintaining and enhancing it.
+## Project Solution Guidelines
+- Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
+- Use these in-solution XML files as the primary files for reference and modification.
+- The `.github/copilot-instructions.md` file is included in the solution under the `.github` solution folder, so it should be read/modified from within the solution instead of using paths outside the solution. Update this file once only, as it and the parent-path solution reference point to the same file in this workspace.
+- When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
+- In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
+- For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
