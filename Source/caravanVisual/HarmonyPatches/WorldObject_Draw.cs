@@ -84,6 +84,19 @@ public class WorldObject_Draw
         }
 
         var longitude = Find.WorldGrid.LongLatOf(caravan.Tile).x;
+        var movementVelocity = caravan.tweener.LastTickTweenedVelocity;
+        if (movementVelocity.sqrMagnitude <= 1E-06f && caravan.pather.MovingNow)
+        {
+            movementVelocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) - Find.WorldGrid.GetTileCenter(caravan.Tile);
+        }
+
+        var reverseDrawOrder = false;
+        if (movementVelocity.sqrMagnitude > 1E-06f)
+        {
+            WorldRendererUtility.GetTangentsToPlanet(instance.DrawPos, out var northTangent, out _);
+            reverseDrawOrder = Vector3.Dot(movementVelocity, northTangent) > 0f;
+        }
+
         for (var i = 0; i < pawns.Count; i++)
         {
             if (i == 0)
@@ -110,8 +123,10 @@ public class WorldObject_Draw
                         new Color(color.r, color.g, color.b, color.a * num));
                 }
 
+                var leaderOrder = reverseDrawOrder ? 0 : pawns.Count + 1;
+                var leaderAltOffset = 0.015f + leaderOrder * 0.0001f;
                 caravanComponent.DrawQuadTangentialToPlanet(caravan.pather.MovingNow ? pawns[i].thingIDNumber : -1,
-                    instance.DrawPos, scale * 3f * averageTileSize, 0.015f, caravanData.Materials[i], longitude,
+                    instance.DrawPos, scale * 3f * averageTileSize, leaderAltOffset, caravanData.Materials[i], longitude,
                     propertyBlock0);
             }
             else
@@ -152,6 +167,8 @@ public class WorldObject_Draw
                     caravanComponent.GetRot(position, -velocity), default,
                     0.5f);
 
+                var followerOrder = reverseDrawOrder ? i : pawns.Count - i;
+                var drawAltOffset = 0.015f + followerOrder * 0.0001f;
 
                 if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.ZoomMode.vanilla &&
                     caravan.def.expandingIcon && transitionPct > 0f)
@@ -159,14 +176,14 @@ public class WorldObject_Draw
                     // fade out
                     caravanComponent.DrawQuadTangentialToPlanet(
                         caravan.pather.MovingNow ? pawns[i].thingIDNumber : -1, position,
-                        scale * 3f * averageTileSize * scale2, 0.015f, caravanData.Materials[i], longitude,
+                        scale * 3f * averageTileSize * scale2, drawAltOffset, caravanData.Materials[i], longitude,
                         propertyBlock0);
                 }
                 else
                 {
                     caravanComponent.DrawQuadTangentialToPlanet(
                         caravan.pather.MovingNow ? pawns[i].thingIDNumber : -1, position,
-                        scale * 3f * averageTileSize * scale2, 0.015f, caravanData.Materials[i], longitude,
+                        scale * 3f * averageTileSize * scale2, drawAltOffset, caravanData.Materials[i], longitude,
                         propertyBlock);
                 }
             }

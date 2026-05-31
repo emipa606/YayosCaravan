@@ -1,5 +1,8 @@
 # Changelog for YayosCaravan
 
+1.6.2 - Fixed draw order and pawn-directions
+
+
 1.6.1 - Should no longer flicker on world edges
 
 

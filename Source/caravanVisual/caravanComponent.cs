@@ -40,7 +40,13 @@ public class caravanComponent : WorldComponent
 
     public static Rot4 GetRot(Caravan caravan)
     {
-        return GetRot(caravan.DrawPos, caravan.tweener.LastTickTweenedVelocity);
+        var velocity = caravan.tweener.LastTickTweenedVelocity;
+        if (velocity.sqrMagnitude <= 1E-06f && caravan.pather.MovingNow)
+        {
+            velocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) - Find.WorldGrid.GetTileCenter(caravan.Tile);
+        }
+
+        return GetRot(caravan.DrawPos, -velocity);
     }
 
     public static Rot4 GetRot(Vector3 velocity)
@@ -74,7 +80,7 @@ public class caravanComponent : WorldComponent
             return east >= 0f ? Rot4.East : Rot4.West;
         }
 
-        return north > 0f ? Rot4.North : Rot4.South;
+        return north > 0f ? Rot4.South : Rot4.North;
     }
 
     private static void update()
@@ -114,21 +120,12 @@ public class caravanComponent : WorldComponent
 
         angle.Normalize();
 
-        if (caravanVisualMod.instance.Settings.SwingAnimation)
+        if (caravanVisualMod.instance.Settings.SwingAnimation && uniqueTick >= 0)
         {
             var swingAxis = Vector3.Cross(angle, vector).normalized;
-            if (uniqueTick >= 0)
-            {
-                var wiggle = Mathf.Sin((time + uniqueTick) * 5f);
-                angle = (angle + swingAxis * wiggle * 0.1f).normalized;
-                pos += wiggle * angle * 0.03f;
-            }
-            else
-            {
-                var wiggle = Mathf.Sin((time + uniqueTick) * 2f);
-                angle = (angle + swingAxis * wiggle * 0.05f).normalized;
-                pos += wiggle * angle * 0.015f;
-            }
+            var wiggle = Mathf.Sin((time + uniqueTick) * 5f);
+            angle = (angle + swingAxis * wiggle * 0.1f).normalized;
+            pos += wiggle * angle * 0.03f;
         }
 
 
