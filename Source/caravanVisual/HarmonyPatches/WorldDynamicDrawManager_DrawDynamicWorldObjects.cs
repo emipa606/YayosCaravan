@@ -4,7 +4,7 @@ using RimWorld.Planet;
 namespace caravanVisual.HarmonyPatches;
 
 [HarmonyPatch(typeof(WorldDynamicDrawManager), "DrawDynamicWorldObjects")]
-public class WorldDynamicDrawManager_DrawDynamicWorldObjects
+public static class WorldDynamicDrawManager_DrawDynamicWorldObjects
 {
     [HarmonyPriority(0)]
     public static void Postfix()

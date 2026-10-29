@@ -10,7 +10,7 @@ using Verse;
 namespace caravanVisual.HarmonyPatches;
 
 [HarmonyPatch(typeof(ExpandableWorldObjectsUtility), nameof(ExpandableWorldObjectsUtility.ExpandableWorldObjectsOnGUI))]
-public class ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
+public static class ExpandableWorldObjectsUtility_ExpandableWorldObjectsOnGUI
 {
     private static readonly List<WorldObject> tmpWorldObjects = AccessTools
         .StaticFieldRefAccess<List<WorldObject>>(AccessTools.Field(typeof(ExpandableWorldObjectsUtility),

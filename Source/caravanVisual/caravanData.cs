@@ -8,10 +8,10 @@ namespace caravanVisual;
 public class caravanData : IExposable
 {
     public readonly List<Material> Materials = [];
-    private Caravan localCaravan;
 
     // Data
     public List<Vector3> PrevPos = [];
+    private Caravan localCaravan;
 
 
     private int tickGap = 20;
@@ -20,7 +20,6 @@ public class caravanData : IExposable
     // Data Save
     public void ExposeData()
     {
-        //Scribe_Collections.Look<Vector3>(ref prevPos, $"pastPos", LookMode.Value);
     }
 
     public void SetParent(Caravan caravan)

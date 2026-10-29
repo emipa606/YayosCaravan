@@ -10,9 +10,8 @@ namespace caravanVisual.HarmonyPatches;
 
 [StaticConstructorOnStartup]
 [HarmonyPatch(typeof(WorldObject), nameof(WorldObject.Draw))]
-public class WorldObject_Draw
+public static class WorldObject_Draw
 {
-    //private static MaterialPropertyBlock propertyBlock = AccessTools.StaticFieldRefAccess<MaterialPropertyBlock>(AccessTools.Field(typeof(WorldObject), "propertyBlock")).Invoke();
     private static readonly MaterialPropertyBlock propertyBlock0 = new();
     private static readonly MaterialPropertyBlock propertyBlock = new();
     private static float scale2 = 1f; // 수정금지 동물크기
@@ -87,7 +86,8 @@ public class WorldObject_Draw
         var movementVelocity = caravan.tweener.LastTickTweenedVelocity;
         if (movementVelocity.sqrMagnitude <= 1E-06f && caravan.pather.MovingNow)
         {
-            movementVelocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) - Find.WorldGrid.GetTileCenter(caravan.Tile);
+            movementVelocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) -
+                               Find.WorldGrid.GetTileCenter(caravan.Tile);
         }
 
         var reverseDrawOrder = false;
@@ -124,9 +124,10 @@ public class WorldObject_Draw
                 }
 
                 var leaderOrder = reverseDrawOrder ? 0 : pawns.Count + 1;
-                var leaderAltOffset = 0.015f + leaderOrder * 0.0001f;
+                var leaderAltOffset = 0.015f + (leaderOrder * 0.0001f);
                 caravanComponent.DrawQuadTangentialToPlanet(caravan.pather.MovingNow ? pawns[i].thingIDNumber : -1,
-                    instance.DrawPos, scale * 3f * averageTileSize, leaderAltOffset, caravanData.Materials[i], longitude,
+                    instance.DrawPos, scale * 3f * averageTileSize, leaderAltOffset, caravanData.Materials[i],
+                    longitude,
                     propertyBlock0);
             }
             else
@@ -144,8 +145,6 @@ public class WorldObject_Draw
 
                 rect.size *= scale * 6f * scale2;
 
-                //rect.width = Mathf.Min(rect.width, 128);
-                //rect.height = Mathf.Min(rect.height, 128);
                 position = instance.DrawPos;
                 velocity = Vector3.zero;
                 counter = i * gapTick;
@@ -160,7 +159,6 @@ public class WorldObject_Draw
 
                     velocity = caravanData.PrevPos[Mathf.Max(0, counter - 3)] - position;
                 }
-                //pos += new Vector3(0f, 0f, 0.1f * i);
 
                 caravanData.Materials[i].mainTexture = PortraitsCache.Get(pawns[i],
                     new Vector2(Mathf.Min(512f, rect.width), Mathf.Min(512f, rect.height)),
@@ -168,7 +166,7 @@ public class WorldObject_Draw
                     0.5f);
 
                 var followerOrder = reverseDrawOrder ? i : pawns.Count - i;
-                var drawAltOffset = 0.015f + followerOrder * 0.0001f;
+                var drawAltOffset = 0.015f + (followerOrder * 0.0001f);
 
                 if (caravanVisualMod.instance.Settings.ZoomMode == caravanComponent.ZoomMode.vanilla &&
                     caravan.def.expandingIcon && transitionPct > 0f)

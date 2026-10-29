@@ -16,11 +16,6 @@ internal class caravanVisualMod : Mod
     private static string currentVersion;
 
     /// <summary>
-    ///     The private settings
-    /// </summary>
-    private caravanVisualSettings settings;
-
-    /// <summary>
     ///     Constructor
     /// </summary>
     /// <param name="content"></param>
@@ -38,11 +33,11 @@ internal class caravanVisualMod : Mod
     {
         get
         {
-            settings ??= GetSettings<caravanVisualSettings>();
+            field ??= GetSettings<caravanVisualSettings>();
 
-            return settings;
+            return field;
         }
-        set => settings = value;
+        set;
     }
 
     /// <summary>
@@ -58,11 +53,11 @@ internal class caravanVisualMod : Mod
     ///     The settings-window
     ///     For more info: https://rimworldwiki.com/wiki/Modding_Tutorials/ModSettings
     /// </summary>
-    /// <param name="rect"></param>
-    public override void DoSettingsWindowContents(Rect rect)
+    /// <param name="inRect"></param>
+    public override void DoSettingsWindowContents(Rect inRect)
     {
         var listingStandard = new Listing_Standard();
-        listingStandard.Begin(rect);
+        listingStandard.Begin(inRect);
         listingStandard.Gap();
         listingStandard.CheckboxLabeled("caravanVisual_swinganimation".Translate(), ref Settings.SwingAnimation,
             "caravanVisual_swinganimation_tooltip".Translate());

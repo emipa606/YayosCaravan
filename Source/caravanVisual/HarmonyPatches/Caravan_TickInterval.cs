@@ -4,7 +4,7 @@ using RimWorld.Planet;
 namespace caravanVisual.HarmonyPatches;
 
 [HarmonyPatch(typeof(Caravan), "TickInterval")]
-public class Caravan_TickInterval
+public static class Caravan_TickInterval
 {
     private static caravanData caravanData;
 

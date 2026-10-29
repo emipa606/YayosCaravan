@@ -43,7 +43,8 @@ public class caravanComponent : WorldComponent
         var velocity = caravan.tweener.LastTickTweenedVelocity;
         if (velocity.sqrMagnitude <= 1E-06f && caravan.pather.MovingNow)
         {
-            velocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) - Find.WorldGrid.GetTileCenter(caravan.Tile);
+            velocity = Find.WorldGrid.GetTileCenter(caravan.pather.nextTile) -
+                       Find.WorldGrid.GetTileCenter(caravan.Tile);
         }
 
         return GetRot(caravan.DrawPos, -velocity);
@@ -124,7 +125,7 @@ public class caravanComponent : WorldComponent
         {
             var swingAxis = Vector3.Cross(angle, vector).normalized;
             var wiggle = Mathf.Sin((time + uniqueTick) * 5f);
-            angle = (angle + swingAxis * wiggle * 0.1f).normalized;
+            angle = (angle + (swingAxis * wiggle * 0.1f)).normalized;
             pos += wiggle * angle * 0.03f;
         }
 
